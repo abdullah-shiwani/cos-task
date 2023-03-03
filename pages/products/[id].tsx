@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import AddToCart from "@/components/AddToCart";
+import ProductReviews from "@/components/ProductReviews";
 import { Product } from "@/types";
 import {
   Container,
@@ -7,7 +8,6 @@ import {
   makeStyles,
   Paper,
   Typography,
-  withStyles,
 } from "@material-ui/core";
 import React from "react";
 
@@ -48,20 +48,25 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
             <img className={classes.img} alt={name} src={image} />
           </Grid>
           <Grid container>
-            <Grid xs={12} sm container direction="column">
-              <Grid item xs>
+            <Grid xs={12} sm container direction="column" spacing={2}>
+              <Grid item>
                 <Typography gutterBottom variant="h3">
                   {name}
                 </Typography>
               </Grid>
-              <Grid item xs container direction="column">
+              <Grid item>
                 <Typography gutterBottom>{description}</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h5">£ {price.toString()} EURO</Typography>
+                <Grid container direction="column">
+                  <Typography variant="h5">
+                    £ {price.toString()} EURO
+                  </Typography>
+                  <AddToCart product={product} />
+                </Grid>
               </Grid>
               <Grid item>
-                <AddToCart product={product} />
+                <ProductReviews data={product.reviews} />
               </Grid>
             </Grid>
           </Grid>
