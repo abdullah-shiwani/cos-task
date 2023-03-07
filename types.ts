@@ -15,4 +15,5 @@ export interface Product {
   category: 'clothing' | 'shoes' | 'accessories';
   image: string;
   images?: string[];
+  reviews?: Review[];
 }

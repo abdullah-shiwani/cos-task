@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import {AddShoppingCart, RemoveShoppingCart } from "@material-ui/icons";
 import { Product } from "../types";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +34,7 @@ const ProductCard = ({
 }) => {
   const classes = useStyles();
   const [isInCart, setIsInCart] = useState(false);
+  const router = useRouter();
 
   const handleAddToCart = () => {
     setIsInCart(true);
@@ -44,9 +46,17 @@ const ProductCard = ({
     removeFromCart(product);
   };
 
+  const viewProductDetail = (productId: Product["id"]) => {
+    router.push(`/products/${productId}`);
+  };
+
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea
+        onClick={() => {
+          viewProductDetail(product.id);
+        }}
+      >
         <CardMedia
           className={classes.media}
           image={product.image}
